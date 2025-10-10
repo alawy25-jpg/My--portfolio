@@ -1,0 +1,889 @@
+  <!DOCTYPE html>
+  <html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>سيرتي الذاتية التقنية الفاخرة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Cairo&display=swap" rel="stylesheet" />
+    <style>
+      /*uuuuuu
+  /* صور المعرض */
+  .certificate {
+    width: 230px;
+    margin: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .certificate:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  }
+
+  #imageModal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    justify-content: center;
+    align-items: center;
+  }
+  #imageModal img {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 12px;
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+  }
+
+
+
+    :root {
+    --color-primary: #00fff7;
+    --text-color: #ffffff;
+    --glass-bg: rgba(0, 0, 0, 0.5);
+    --blur: 20px;
+  }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Cairo', sans-serif;
+    color: var(--text-color);
+    background-color: black;
+    overflow-x: hidden;
+    direction: rtl;
+    min-height: 100vh;
+    scroll-behavior: smooth;
+  }
+
+  body.default-mode {
+    color: var(--text-color);
+    background-color: #000;
+  }
+
+  body.light-mode {
+    color: #111;
+    background: #f0f8ff;
+  }
+
+  body.cyber-mode {
+    color: #0ff;
+    font-weight: bold;
+    background-color: #001010;
+  }
+
+  body.matrix-mode {
+    color: #0f0;
+    font-family: 'Courier New', monospace;
+    font-weight: 900;
+    background-color: #001000;
+  }
+
+  canvas.background-canvas {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 0;
+    display: block;
+  }
+
+  /* محاذاة جميع النصوص لليسار */
+  .container {
+    position: relative;
+    max-width: 900px;
+    margin: 50px auto 100px auto;
+    padding: 40px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--blur));
+    border-radius: 20px;
+    box-shadow: 0 0 25px rgba(0,255,247,0.3);
+    z-index: 10;
+    transition: background 0.5s ease, color 0.5s ease;
+    text-align: left;
+  }
+
+  body.light-mode .container {
+    background: rgba(255, 255, 255, 0.9);
+    color: #111;
+    box-shadow: 0 0 20px rgba(0,0,0,0.15);
+  }
+
+  body.cyber-mode .container {
+    background: rgba(0, 15, 15, 0.9);
+    box-shadow: 0 0 40px #0ff;
+    color: #0ff;
+    border: 1px solid #0ff;
+  }
+
+  body.matrix-mode .container {
+    background: rgba(0, 20, 0, 0.85);
+    box-shadow: 0 0 30px #0f0;
+    border: 1px solid #0f0;
+    color: #0f0;
+    font-family: 'Courier New', monospace;
+  }
+
+  /* الاسم والوصف في المنتصف */
+  .header {
+    text-align: center;
+  }
+
+  .header img {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    border: 4px solid var(--color-primary);
+    margin-bottom: 15px;
+    box-shadow: 0 0 15px var(--color-primary);
+    cursor: pointer;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    user-select: none;
+    object-fit: cover;
+    background: #111;
+    display: inline-block;
+  }
+
+  .header img.enlarged {
+    transform: scale(2) rotate(10deg);
+    box-shadow: 0 0 40px var(--color-primary);
+    position: relative;
+    z-index: 9999;
+  }
+
+  .header h1 {
+    font-size: 2.5em;
+    color: var(--color-primary);
+    font-family: 'Orbitron', sans-serif;
+    transition: color 0.5s ease;
+    margin: 0;
+  }
+
+  body.light-mode .header h1 {
+    color: #007a9a;
+  }
+
+  body.cyber-mode .header h1 {
+    color: #0f0;
+    text-shadow: 0 0 8px #0f0;
+  }
+
+  body.matrix-mode .header h1 {
+    color: #0f0;
+    text-shadow: 0 0 10px #0f0;
+  }
+
+  .header p {
+    font-size: 1.1em;
+    color: #ccc;
+    margin-top: 5px;
+    transition: color 0.5s ease;
+  }
+
+  body.light-mode .header p {
+    color: #555;
+  }
+
+  body.cyber-mode .header p {
+    color: #0aa;
+  }
+
+  body.matrix-mode .header p {
+    color: #0a0;
+    font-family: 'Courier New', monospace;
+  }
+
+  /* جعل النصوص والفقرات والقوائم كلها لليسار */
+  .section,
+  .section p,
+  .section ul,
+  .section li {
+    text-align: left;
+  }
+
+  .section {
+    margin-bottom: 30px;
+    animation: slideIn 1.2s ease forwards;
+  }
+
+  .section h2 {
+    font-size: 1.8em;
+    color: var(--color-primary);
+    border-bottom: 2px solid var(--color-primary);
+    padding-bottom: 8px;
+    margin-bottom: 15px;
+    transition: color 0.5s ease, border-color 0.5s ease;
+  }
+
+  .section ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  /* نجمة القائمة في اليسار بدلاً من اليمين */
+  .section ul li {
+    margin-bottom: 12px;
+    padding-left: 25px;
+    padding-right: 0;
+    position: relative;
+    font-size: 1.1em;
+    transition: color 0.5s ease;
+  }
+
+  .section ul li::before {
+    content: "★";
+    position: absolute;
+    left: 0;
+    color: var(--color-primary);
+    transition: color 0.5s ease;
+  }
+
+  /* تعديل الأزرار وجعلها متناسقة باستخدام علاويFlexbox */
+/* 🟦 تنسيق الأزرار بنظام الشبكة */
+/* 🟦 تنسيق الشبكة */
+.actions {
+  display: grid !important;
+  grid-template-columns: repeat(4, auto); /* 4 أزرار في الصف الأول */
+  justify-content: center; /* تمركز الصف بالكامل في الوسط */
+  gap: 40px 50px; /* مسافة أفقية وعمودية أكبر بين الأزرار */
+  margin-top: 40px;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* 🎨 شكل الأزرار */
+.actions .btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 180px; /* عرض ثابت قليلاً ليظهر بشكل متساوٍ */
+  background: linear-gradient(135deg, #000000, #000000);
+  color: #fff;
+  padding: 14px 22px;
+  border-radius: 12px;
+  font-size: 16px;
+  text-decoration: none;
+  font-weight: bold;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+  transition: all 0.3s ease;
+}
+
+.actions .btn:hover {
+  transform: scale(1.07);
+  background: linear-gradient(135deg, #00b4d8, #0078ff);
+}
+
+/* 📱 متجاوب مع الشاشات الصغيرة */
+@media (max-width: 900px) {
+  .actions {
+    grid-template-columns: repeat(3, auto); /* صفوف من 3 أزرار */
+  }
+}
+
+@media (max-width: 600px) {
+  .actions {
+    grid-template-columns: repeat(2, auto); /* صفين في الجوال */
+    gap: 25px;
+  }
+}
+
+@media (max-width: 420px) {
+  .actions {
+    grid-template-columns: 1fr; /* زر واحد في كل صف على الهواتف الصغيرة */
+  }
+}
+
+
+  /* تعديل الأزرار وجعلها في صف واحد ومتناسقة */
+  .actions {
+    display: flex;
+    flex-wrap: nowrap; /* منع التفاف الأزرار إلى صف جديد */
+    justify-content: center; /* تمركز أفقياً */
+    gap: 20px; /* مسافة بين الأزرار */
+    margin-top: 35px;
+    flex-direction: row; /* التأكيد على وضع الأزرار في صف */
+  }
+
+  .btn,
+  #toggleGallery {
+    flex: 1 1 200px; /* مساحة مرنة مع حد أدنى 200px */
+    max-width: 220px; /* الحد الأقصى للعرض */
+    background-color: transparent;
+    color: var(--color-primary);
+    padding: 12px 20px;
+    border: 2.5px solid var(--color-primary);
+    border-radius: 35px;
+    font-size: 1.2em;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    text-decoration: none;
+    user-select: none;
+    box-shadow: 0 0 8px var(--color-primary);
+    letter-spacing: 0.07em;
+    text-align: center;
+    white-space: nowrap; /* منع التفاف النص داخل الزر */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0; /* إزالة الهوامش لتجنب التداخل */
+  }
+
+  .btn:hover,
+  .btn:focus,
+  #toggleGallery:hover,
+  #toggleGallery:focus {
+    background-color: var(--color-primary);
+    color: #000;
+    box-shadow: 0 0 20px var(--color-primary);
+    transform: scale(1.08);
+    outline: none;
+  }
+
+  .btn:active,
+  #toggleGallery:active {
+    transform: scale(0.98);
+    box-shadow: 0 0 15px var(--color-primary);
+  }
+
+  .btn:focus-visible,
+  #toggleGallery:focus-visible {
+    outline: 3px solid var(--color-primary);
+    outline-offset: 3px;
+  }
+
+
+  .toggle-mode {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background-color: rgba(0,0,0,0.6);
+    color: var(--color-primary);
+    border: none;
+    padding: 10px 22px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s ease;
+    z-index: 9999;
+    user-select: none;
+    min-width: 140px;
+    text-align: center;
+  }
+
+  .toggle-mode:hover {
+    background-color: var(--color-primary);
+    color: #000;
+  }
+
+      /* Animations */
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      @keyframes slideIn {
+        from { opacity: 0; transform: translateX(-30px); }
+        to { opacity: 1; transform: translateX(0); }
+      }
+
+      /* Responsive */
+      @media(max-width: 640px) {
+        .container {
+          margin: 30px 10px 80px 10px;
+          padding: 25px 20px;
+        }
+        .header h1 {
+          font-size: 1.9em;
+        }
+      }
+      .certificates-gallery {
+    display: none;
+    margin-top: 20px;
+    text-align: center;
+  }
+
+  .gallery-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 20px;
+  }
+
+  .gallery-grid img {
+    width: 150px;
+    height: auto;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 2px solid var(--color-primary);
+  }
+
+  .gallery-grid img:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px var(--color-primary);
+  }
+
+  /* الصورة المكبرة */
+  .fullscreen-img {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1);
+    max-width: 90vw;
+    max-height: 90vh;
+    z-index: 10000;
+    border: 5px solid var(--color-primary);
+    box-shadow: 0 0 30px var(--color-primary);
+    background-color: black;
+    border-radius: 12px;
+    cursor: zoom-out;
+    transition: transform 0.3s ease;
+  }
+
+
+
+  #certificatesGallery {
+    display: none;
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    direction: ltr;
+  }
+
+  #certificatesGallery img {
+    width: 220px;
+    height: 150px;
+    object-fit: contain;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 0 10px #00fff7;
+  }
+
+  #certificatesGallery img:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px #00fff7;
+  }
+
+  /* الصورة المكبرة */
+  .fullscreen-img {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    max-width: 90vw;
+    max-height: 90vh;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 30px #00fff7;
+    border-radius: 10px;
+    background: #000;
+    z-index: 9999;
+    cursor: zoom-out;
+  }
+
+
+
+    </style>
+  </head>
+  <script>
+    // زر عرض / إخفاء المعرض
+    const galleryToggle = document.getElementById("toggleGallery");
+    const gallery = document.getElementById("certificatesGallery");
+
+    if (galleryToggle) {
+      galleryToggle.addEventListener("click", function(e) {
+        e.preventDefault();
+        gallery.style.display = (gallery.style.display === "none") ? "block" : "none";
+      });
+    }
+
+    // تكبير الصور
+    const modal = document.getElementById("imageModal");
+    const modalImg = document.getElementById("modalImage");
+    const certs = document.querySelectorAll(".certificate");
+
+    certs.forEach(img => {
+      img.addEventListener("click", function() {
+        modal.style.display = "flex";
+        modalImg.src = this.src;
+      });
+    });
+
+    // إغلاق عند النقر على الصورة المكبرة
+    modal.addEventListener("click", function() {
+      modal.style.display = "none";
+    });
+  </script>
+
+  <body class="default-mode">
+    <canvas class="background-canvas"></canvas>
+
+    <button class="toggle-mode" aria-label="تبديل وضع الخلفية">الوضع التالي</button>
+
+    <main class="container" role="main" tabindex="0">
+      <section class="header" aria-label="معلومات شخصية">
+        <img src="my.jpeg" alt="الصورة الشخصية" id="profilePic" />
+        <h1>Ali Adil Ali Alfarsi</h1>
+        <p>Technical Support</p>
+      </section>
+
+      <section class="section" aria-label="نبذة شخصية">
+        <h2>Personal profile</h2>
+        <p>I am a graduate of Sohar University with a degree in Networking and
+          Database Administration. After graduation, I focused on developing 
+          my technical skills through practical training and specialized courses. 
+          I acquired strong skills in technical support, troubleshooting, and providing 
+          effective solutions. I also have a basic understanding of HTML. 
+          I am always striving to learn and grow, and to contribute to 
+          a work environment that enables me to add real value through my 
+          technical knowledge and problem-solving skills.</p>
+      </section>
+
+      <section class="section" aria-label="المهارات">
+        <h2>skills</h2>
+        <ul>
+          <li>Time managment</li>
+          <li>Problem analysis</li>
+          <li>Problem solving</li>
+          <li>Communication skills</li>
+          <li>Computer knowledge</li>
+          <li>Understanding the internal part of the Computer </li>
+          <li>Understanding HTML concepts</li>
+        </ul>
+      </section>
+
+      <section class="section" aria-label="الخبرات العملية">
+        <h2>Work Experience</h2>
+        <ul>
+          <li>Delegate Talabat 2024 -2024 Sohar
+          worked as a delivery representative at lalabat, where I was responsible for picking up orders from restaurants and delivering them to customers
+          accurarely and on time. wnie canerina to cuancy Scandaros and customel service, and ensuring the safety of the order during delivery.</li>
+          <li>Delegate GFS Express 2025 -2025 Sohar
+          I worked as a delivery representative at GFS, where I delivered packages to customers, upaated tne shipment statuses, and ensured tne package was delivered at the right time and place, while maintaining service quality and
+          courreous ineracuion win cuscomers..
+          Contact: 72223747</li>
+        </ul>
+      </section>
+
+      <section class="section" aria-label="التعليم">
+        <h2>Education</h2>
+        <ul>
+          <li>Diploma in Networking And Database, Sohar University,  2021 -2024 ,  GPA:2.6</li>
+          <li>General education diploma AL Emam Alrabea bin habib Basic Education School, Liwa, 2020 - 2021 ,GPA:81.4</li>
+        </ul>
+      </section>
+
+      <section class="section" aria-label=" الشهادات">
+        <h2>Certificates</h2>
+        <ul>
+          <li>Nama Water Services (06/2024 - 07/2024)
+  I completed an internship in the technical support field, where I solved device issues.</li>
+          <li>Nafith Oman (11/2024 - 12/2024)
+  Troubleshooting some devices that have malfunctioned and calibrating some cameras and inspecting some cameras and slow devices.</li>
+          <li>Sohar University (01/2025 - 02/2020)
+  Maintenance of computer devices and networks in technica. support, which enhanced my skills in troubleshooting and providina immediate solutions</li>
+          <li>Online / Adlal Omantel (02/2025 - 02/2025)
+  Designing reports and dashboards using Microsoft Power BI</li>
+          
+        </ul>
+      </section>
+
+      <section class="section" aria-label=" languge">
+        <h2>languge</h2>
+        <ul>
+          <li> Arabic</li>
+          <li>English</li>
+        </ul>
+      </section>
+
+
+      <section class="section" aria-label=" الاهتمامات">
+        <h2>Interests</h2>
+        <ul>
+          <li>Programming and problem solving skills</li>
+          <li>Online training courses</li>
+          <li>Design and editing</li>
+          <li>Playing chess</li>
+          <li>Browsing</li>
+        </ul>
+      </section>
+
+    <section class="actions">
+  <!-- الصف الأول: 4 أزرار -->
+  <a href="cv.pdf" download class="btn">تحميل السيرة الذاتية</a>
+  <a href="Cv2.pdf" download class="btn">تحميل السيرة الذاتية</a>
+  <a href="Cv3.pdf" download class="btn">تحميل السيرة الذاتية</a>
+  <a href="Cv4.pdf" download class="btn">تحميل السيرة الذاتية</a>
+
+  <!-- الصف الثاني: 3 أزرار -->
+  <a href="mailto:aly941534@gmail.com" class="btn">📧 جيميل</a>
+  <a href="https://wa.me/96160219" target="_blank" rel="noopener" class="btn">📱 واتساب</a>
+  <a href="#" id="toggleGallery" class="btn">عرض صور الشهادات 📄</a>
+</section>
+
+
+  <!-- معرض الشهادات -->
+  <div id="certificatesGallery" style="display: none; text-align: center; margin-top: 20px;">
+    <img src="A1.jpeg" alt="شهادة 1" class="certificate" />
+    <img src="A2.jpeg" alt="شهادة 2" class="certificate" />
+    <img src="A3.jpeg" alt="شهادة 3" class="certificate" />
+    <img src="A4.jpeg" alt="شهادة 4" class="certificate" />
+    <img src="A5.jpeg" alt="شهادة 5" class="certificate" />
+  </div>
+
+  <!-- نافذة الصورة المكبرة -->
+  <div id="imageModal">
+    <img id="modalImage" src="" alt="عرض الشهادة">
+  </div>
+
+
+    <script>
+      // الخلفية المتحركة باستخدام Canvas
+
+      const canvas = document.querySelector('.background-canvas');
+      const ctx = canvas.getContext('2d');
+
+      let width, height;
+      let animationId;
+
+      let modeIndex = 0;
+      const modes = ['default', 'light', 'cyber', 'matrix'];
+
+      const toggleBtn = document.querySelector('.toggle-mode');
+
+      function resize() {
+        width = window.innerWidth;
+        height = window.innerHeight;
+        canvas.width = width;
+        canvas.height = height;
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      // 1. Default mode: خطوط تقنية متحركة (شبكة خطوط رأسية وأفقية)
+
+      let defaultLines = [];
+      const defaultSpacing = 80;
+      const defaultSpeed = 0.8;
+
+      function initDefault() {
+        defaultLines = [];
+        for(let x=0; x <= width; x += defaultSpacing) {
+          defaultLines.push({x, offset: Math.random()*height});
+        }
+        for(let y=0; y <= height; y += defaultSpacing) {
+          defaultLines.push({y, offset: Math.random()*width});
+        }
+        animateDefault();
+      }
+
+      function animateDefault() {
+        ctx.clearRect(0, 0, width, height);
+        ctx.strokeStyle = 'rgba(0,255,247,0.3)';
+        ctx.lineWidth = 1;
+
+        // خطوط رأسية
+        defaultLines.forEach(line => {
+          if(line.x !== undefined){
+            line.offset += defaultSpeed;
+            if(line.offset > height + 20) line.offset = -20;
+
+            ctx.beginPath();
+            ctx.moveTo(line.x, 0);
+            ctx.lineTo(line.x, height);
+            ctx.stroke();
+
+            // خطوط أفقية عند offset
+            ctx.beginPath();
+            ctx.moveTo(0, line.offset);
+            ctx.lineTo(width, line.offset);
+            ctx.stroke();
+          }
+        });
+
+        animationId = requestAnimationFrame(animateDefault);
+      }
+      // 2. Light mode: شبكة خطوط خفيفة تتوهج وتخفت
+      let lightOpacity = 0;
+      let increasing = true;
+      const lightSpacing = 50;
+      function animateLight() {
+        ctx.clearRect(0, 0, width, height);
+        ctx.strokeStyle = `rgba(0, 122, 154, ${lightOpacity.toFixed(2)})`;
+        ctx.lineWidth = 1;
+        ctx.setLineDash([5, 15]);
+        for(let x=0; x <= width; x += lightSpacing){
+          ctx.beginPath();
+          ctx.moveTo(x, 0);
+          ctx.lineTo(x, height);
+          ctx.stroke();
+        }
+        for(let y=0; y <= height; y += lightSpacing){
+          ctx.beginPath();
+          ctx.moveTo(0, y);
+          ctx.lineTo(width, y);
+          ctx.stroke();
+        }
+        ctx.setLineDash([]);
+        if(increasing){
+          lightOpacity += 0.01;
+          if(lightOpacity >= 0.3) increasing = false;
+        } else {
+          lightOpacity -= 0.01;
+          if(lightOpacity <= 0) increasing = true;
+        }
+        animationId = requestAnimationFrame(animateLight);
+      }
+      // 3. Cyber mode: موجة نيون أفقية متحركة
+      let cyberOffset = 0;
+      const cyberSpeed = 2;
+      const cyberWaveHeight = 20;
+      const cyberWaveLength = 180;
+      function animateCyber() {
+        ctx.clearRect(0, 0, width, height);
+        ctx.lineWidth = 3;
+        ctx.strokeStyle = '#00fff7';
+        ctx.shadowColor = '#00fff7';
+        ctx.shadowBlur = 15;
+        const yCenter = height/2;
+        ctx.beginPath();
+        for(let x=0; x <= width; x++){
+          const y = yCenter + cyberWaveHeight * Math.sin((x + cyberOffset) * 2 * Math.PI / cyberWaveLength);
+          if(x === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+        // خطوط إضافية موازية لإضافة تأثير النيون
+        for(let i=1; i<=3; i++){
+          ctx.beginPath();
+          ctx.lineWidth = 1.5;
+          ctx.strokeStyle = `rgba(0, 255, 247, ${0.3/i})`;
+          ctx.shadowColor = `rgba(0, 255, 247, ${0.3/i})`;
+          ctx.shadowBlur = 10;
+          for(let x=0; x <= width; x++){
+            const y = yCenter + (cyberWaveHeight + 5*i) * Math.sin((x + cyberOffset + 40*i) * 2 * Math.PI / cyberWaveLength);
+            if(x === 0) ctx.moveTo(x, y);
+            else ctx.lineTo(x, y);
+          }
+          ctx.stroke();
+        }
+        cyberOffset += cyberSpeed;
+        if(cyberOffset > cyberWaveLength) cyberOffset = 0;
+        animationId = requestAnimationFrame(animateCyber);
+      }
+      // 4. Matrix mode: أرقام ثنائية تسقط
+      const matrixChars = '01'.split('');
+      let matrixDrops = [];
+      const matrixFontSize = 16;
+      function initMatrix() {
+        matrixDrops = [];
+        const columns = Math.floor(width / matrixFontSize);
+        for(let i=0; i<columns; i++) {
+          matrixDrops[i] = Math.floor(Math.random() * height / matrixFontSize);
+        }
+        ctx.font = `${matrixFontSize}px Courier New`;
+      }
+      function animateMatrix() {
+        ctx.fillStyle = 'rgba(0, 20, 0, 0.1)';
+        ctx.fillRect(0, 0, width, height);
+        ctx.fillStyle = '#0f0';
+        ctx.shadowColor = '#0f0';
+        ctx.shadowBlur = 5;
+        ctx.font = `${matrixFontSize}px Courier New`;
+
+        for(let i=0; i < matrixDrops.length; i++) {
+          const text = matrixChars[Math.floor(Math.random() * matrixChars.length)];
+          const x = i * matrixFontSize;
+          const y = matrixDrops[i] * matrixFontSize;
+
+          ctx.fillText(text, x, y);
+
+          if(y > height && Math.random() > 0.975) matrixDrops[i] = 0;
+
+          matrixDrops[i]++;
+        }
+        animationId = requestAnimationFrame(animateMatrix);
+      }
+      // إدارة تبديل الأوضاع
+
+      function stopAnimation(){
+        if(animationId){
+          cancelAnimationFrame(animationId);
+          animationId = null;
+        }
+      }
+      function setMode(mode){
+        stopAnimation();
+        document.body.className = mode + '-mode';
+        switch(mode){
+          case 'default':
+            initDefault();
+            break;
+          case 'light':
+            lightOpacity = 0;
+            increasing = true;
+            animateLight();
+            break;
+          case 'cyber':
+            cyberOffset = 0;
+            animateCyber();
+            break;
+          case 'matrix':
+            initMatrix();
+            animateMatrix();
+            break;
+        }
+      }
+      // التبديل عند الضغط على الزر
+      toggleBtn.addEventListener('click', () => {
+        modeIndex = (modeIndex + 1) % modes.length;
+        setMode(modes[modeIndex]);
+      });
+      // بدء الوضع الافتراضي عند تحميل الصفحة
+      setMode(modes[modeIndex]);
+      // تكبير الصورة الشخصية عند النقر
+      const profilePic = document.getElementById('profilePic');
+      profilePic.addEventListener('click', () => {
+        profilePic.classList.toggle('enlarged');
+      }); 
+    // زر عرض الشهادات
+  const toggleGalleryBtn = document.getElementById('toggleGallery');
+  const certificatesGallery = document.getElementById('certificatesGallery');
+
+  toggleGalleryBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (certificatesGallery.style.display === 'none') {
+      certificatesGallery.style.display = 'flex';
+      toggleGalleryBtn.textContent = 'إخفاء صور الشهادات 🔽';
+    } else {
+      certificatesGallery.style.display = 'none';
+      toggleGalleryBtn.textContent = 'عرض صور الشهادات 📄';
+    }
+  });
+  // تكبير الصور عند النقر
+  certificatesGallery.addEventListener('click', (e) => {
+    if (e.target.tagName === 'IMG') {
+      const fullscreenImg = document.createElement('img');
+      fullscreenImg.src = e.target.src;
+      fullscreenImg.alt = e.target.alt;
+      fullscreenImg.classList.add('fullscreen-img');
+
+      fullscreenImg.addEventListener('click', () => {
+        fullscreenImg.remove();
+      });
+
+      document.body.appendChild(fullscreenImg);
+    }
+  });
+  </script>
+  </body>
+  </html>
